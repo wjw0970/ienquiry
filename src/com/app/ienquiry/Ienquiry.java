@@ -7,6 +7,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Ienquiry {
 
@@ -38,7 +41,7 @@ public class Ienquiry {
 					.findElement(By.cssSelector("#ownAppSection > table > tbody > tr.bodyTxt > td:nth-child(3)"));
 
 			String result = statusValue.getText();
-			if (result == "Pending") {
+			if (result.equalsIgnoreCase("Pending")) {
 				System.out.println("The status is still \"" + result + "\" :(");
 			} else {
 				System.out.println("Opps! the result is .... \"" + result + "\"");
@@ -48,6 +51,9 @@ public class Ienquiry {
 
 			Alert a = d.switchTo().alert();
 			a.accept();
+			WebElement welcomeMsg = (new WebDriverWait(d, 10))
+					.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#main > h1")));
+			System.out.println(welcomeMsg.getText());
 			Thread.sleep(3000);
 			d.quit();
 
