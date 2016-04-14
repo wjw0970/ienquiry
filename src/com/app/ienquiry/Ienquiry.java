@@ -38,8 +38,11 @@ public class Ienquiry {
 					.findElement(By.cssSelector("#ownAppSection > table > tbody > tr.bodyTxt > td:nth-child(3)"));
 
 			String result = statusValue.getText();
-			System.out.println("The status is " + result);
-
+			if (result == "Pending") {
+				System.out.println("The status is still \"" + result + "\" :(");
+			} else {
+				System.out.println("Opps! the result is .... \"" + result + "\"");
+			}
 			WebElement logout = d.findElement(By.cssSelector("#spLogout > a"));
 			logout.click();
 
